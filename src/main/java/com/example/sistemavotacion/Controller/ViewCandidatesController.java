@@ -15,7 +15,7 @@ public class ViewCandidatesController {
     @FXML
     public void initialize() {
         try {
-            // Asegúrate de que las imágenes estén en el directorio correcto dentro de resources
+
             imageView1.setImage(new Image(getClass().getResourceAsStream("/image/fotoUribe.jpg")));
             imageView2.setImage(new Image(getClass().getResourceAsStream("/image/fotoPetro.jpg")));
         } catch (Exception e) {

@@ -1,20 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.geometry.Insets?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.sistemavotacion.Controller.MainController">
+<BorderPane prefHeight="200.0" prefWidth="350.0" style="-fx-background-color: #f0f0f0;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22" fx:controller="com.example.sistemavotacion.Controller.MainController">
   <top>
     <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
-      <Label text="Sistema de Votación" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+      <padding>
+        <Insets top="20" bottom="10" />
+      </padding>
+      <Label style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Sistema de Votación" />
     </VBox>
   </top>
   <center>
-    <VBox alignment="CENTER" spacing="10" BorderPane.alignment="CENTER">
-      <Button text="Registrar Voto" onAction="#handleRegisterVote" />
-      <Button text="Ver Candidatos" onAction="#handleViewCandidates" />
+    <VBox alignment="CENTER" spacing="15" BorderPane.alignment="CENTER">
+      <Button onAction="#handleRegisterVote" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-background-radius: 5;">
+        Registrar Voto
+      </Button>
+      <Button onAction="#handleViewCandidates" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-background-radius: 5;">
+        Ver Candidatos
+      </Button>
     </VBox>
   </center>
 </BorderPane>
