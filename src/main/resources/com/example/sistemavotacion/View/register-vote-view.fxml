@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.sistemavotacion.Controller.MainController"
+      prefHeight="200" prefWidth="320">
+
+    <Label text="Registrar Voto" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10">
+        <Label text="ID Candidato:" />
+        <TextField fx:id="candidateIdField" promptText="Ingrese ID del Candidato" />
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="ID Votante:" />
+        <TextField fx:id="voterIdField" promptText="Ingrese ID del Votante" />
+    </HBox>
+
+    <HBox spacing="10">
+        <Label text="Fecha del Voto:" />
+        <DatePicker fx:id="datePicker" />
+    </HBox>
+
+    <Button text="Registrar" onAction="#handleRegister" />
+
+</VBox>
