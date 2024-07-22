@@ -1,38 +1,59 @@
 package com.example.sistemavotacion.Controller;
 
-
+import com.example.sistemavotacion.Model.Candidate;
+import com.example.sistemavotacion.Model.CandidateDAO;
 import com.example.sistemavotacion.Model.Vote;
 import com.example.sistemavotacion.Model.VoteDAO;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
-import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class RegisterVoteController {
 
     @FXML
-    private TextField candidateIdField;
+    private ComboBox<Candidate> candidateComboBox;
 
     @FXML
-    private TextField voterIdField;
+    public void initialize() {
+        CandidateDAO candidateDAO = new CandidateDAO();
+        candidateComboBox.getItems().addAll(candidateDAO.getCandidates());
+    }
 
     @FXML
-    private TextField dateField;
+    private void handleRegister() {
+        Candidate selectedCandidate = candidateComboBox.getSelectionModel().getSelectedItem();
 
-    @FXML
-    private void handleRegister() throws SQLException {
-        int candidateId = Integer.parseInt(candidateIdField.getText());
-        int voterId = Integer.parseInt(voterIdField.getText());
-        String dateString = dateField.getText();
+        if (selectedCandidate == null) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Por favor, seleccione un candidato.");
+            alert.showAndWait();
+            return;
+        }
 
-        // Convertir la cadena de fecha a LocalDateTime
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime date = LocalDateTime.parse(dateString, formatter);
-
-        Vote vote = new Vote(candidateId, voterId, date);
         VoteDAO voteDAO = new VoteDAO();
-        voteDAO.registerVote(vote);
+        // Aquí debes obtener el ID del votante de alguna manera, por ejemplo, desde una sesión o una entrada de usuario
+        int voterId = 1; // Ejemplo: ID del votante
+        Vote vote = new Vote(selectedCandidate.getId(), voterId, LocalDateTime.now());
+
+        try {
+            voteDAO.registerVote(vote);
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Éxito");
+            alert.setHeaderText(null);
+            alert.setContentText("Voto registrado con éxito.");
+            alert.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Error al registrar el voto.");
+            alert.showAndWait();
+        }
     }
 }

@@ -8,20 +8,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class VoteDAO {
 
+    private static final Logger LOGGER = Logger.getLogger(VoteDAO.class.getName());
+
     public void registerVote(Vote vote) throws SQLException {
-        Connection connection = DatabaseConnection.getConnection();
         String query = "INSERT INTO votes (candidate_id, voter_id, date) VALUES (?, ?, ?)";
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
             preparedStatement.setInt(1, vote.getCandidateId());
             preparedStatement.setInt(2, vote.getVoterId());
             preparedStatement.setString(3, vote.getDate().toString());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error al registrar el voto", e);
+            throw e;
         }
     }
 
@@ -41,7 +46,7 @@ public class VoteDAO {
                 votes.add(vote);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error al obtener los votos", e);
         }
         return votes;
     }
@@ -59,8 +64,26 @@ public class VoteDAO {
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Error al verificar si el votante ya ha votado", e);
         }
         return false;
+    }
+
+    // Nuevo método para obtener el conteo de votos para un candidato específico
+    public int getVoteCount(int candidateId) {
+        String query = "SELECT COUNT(*) FROM votes WHERE candidate_id = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, candidateId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Error al obtener el conteo de votos para el candidato con ID: " + candidateId, e);
+        }
+        return 0; // Retorna 0 si ocurre un error o no hay votos
     }
 }
