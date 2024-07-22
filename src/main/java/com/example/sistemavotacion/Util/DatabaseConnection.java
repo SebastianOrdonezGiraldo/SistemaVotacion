@@ -7,12 +7,21 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/votacion";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
+    public static Connection databaseLink;
 
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USER, PASSWORD);
+    public static Connection getConnection() {
+        String databaseName="bc2hky8dpornvthdni1y";
+        String databaseUser="upgfp6ned3m77ha4";
+        String databasePassword="TdAsLKdnXx0XEHNwKFCB";
+        String url="jdbc:mysql://bc2hky8dpornvthdni1y-mysql.services.clever-cloud.com/"+databaseName;
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            databaseLink=DriverManager.getConnection(url,databaseUser,databasePassword);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return databaseLink;
     }
 }
 
