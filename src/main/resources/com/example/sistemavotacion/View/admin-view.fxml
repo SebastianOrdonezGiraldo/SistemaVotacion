@@ -6,38 +6,37 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.sistemavotacion.Controller.MainController"
-            prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f0f0f0;">
+            fx:controller="com.example.sistemavotacion.Controller.AdminController"
+            prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f0f0f0;">
     <children>
         <VBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
-            <Label text="Sistema de Votación" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Label text="Sistema de Votación" style="-fx-font-size: 40px; -fx-font-weight: bold; -fx-text-fill: #2c3e50; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 2);"/>
 
-            <TabPane tabClosingPolicy="UNAVAILABLE">
+            <TabPane tabClosingPolicy="UNAVAILABLE" style="-fx-background-color: #ecf0f1;">
                 <Tab text="Agregar Candidato">
-                    <VBox spacing="10" alignment="CENTER">
-                        <TextField fx:id="candidateNameField" promptText="Nombre del Candidato"/>
-                        <TextField fx:id="candidatePartyField" promptText="Partido Político"/>
-                        <Button text="Agregar Candidato" onAction="#handleAddCandidate"/>
-                        <Label fx:id="candidateMessage"/>
+                    <VBox spacing="20" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10;">
+                        <TextField fx:id="candidateNameField" promptText="Nombre del Candidato" style="-fx-pref-width: 350; -fx-font-size: 16px; -fx-background-radius: 5;"/>
+                        <Button text="Agregar Candidato" onAction="#handleAddCandidate" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 16px; -fx-pref-width: 250; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);"/>
+                        <Label fx:id="candidateMessage" style="-fx-font-size: 16px; -fx-text-fill: #27ae60;"/>
                     </VBox>
                 </Tab>
 
                 <Tab text="Agregar Votante">
-                    <VBox spacing="10" alignment="CENTER">
-                        <TextField fx:id="voterNameField" promptText="Nombre del Votante"/>
-                        <TextField fx:id="voterIdField" promptText="Identificación del Votante"/>
-                        <Button text="Agregar Votante" onAction="#handleAddVoter"/>
-                        <Label fx:id="voterMessage"/>
+                    <VBox spacing="20" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10;">
+                        <TextField fx:id="voterNameField" promptText="Nombre del Votante" style="-fx-pref-width: 350; -fx-font-size: 16px; -fx-background-radius: 5;"/>
+                        <TextField fx:id="voterIdField" promptText="Identificación del Votante" style="-fx-pref-width: 350; -fx-font-size: 16px; -fx-background-radius: 5;"/>
+                        <Button text="Agregar Votante" onAction="#handleAddVoter" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 16px; -fx-pref-width: 250; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);"/>
+                        <Label fx:id="voterMessage" style="-fx-font-size: 16px; -fx-text-fill: #27ae60;"/>
                     </VBox>
                 </Tab>
 
                 <Tab text="Resultados de Votos">
-                    <VBox spacing="10" alignment="CENTER">
-                        <Button text="Actualizar Resultados" onAction="#handleUpdateResults"/>
-                        <TableView fx:id="resultsTable">
+                    <VBox spacing="20" alignment="CENTER" style="-fx-background-color: white; -fx-padding: 30; -fx-background-radius: 10;">
+                        <Button text="Actualizar Resultados" onAction="#handleUpdateResults" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 16px; -fx-pref-width: 250; -fx-background-radius: 5; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 1);"/>
+                        <TableView fx:id="resultsTable" style="-fx-pref-width: 500; -fx-pref-height: 300;">
                             <columns>
-                                <TableColumn fx:id="candidateColumn" text="Candidato"/>
-                                <TableColumn fx:id="votesColumn" text="Votos"/>
+                                <TableColumn fx:id="candidateColumn" text="Candidato" style="-fx-pref-width: 250;"/>
+                                <TableColumn fx:id="votesColumn" text="Votos" style="-fx-pref-width: 250;"/>
                             </columns>
                         </TableView>
                     </VBox>

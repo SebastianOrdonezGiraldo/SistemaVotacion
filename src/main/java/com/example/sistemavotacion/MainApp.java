@@ -14,7 +14,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/sistemavotacion/View/admin-view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/sistemavotacion/View/login-view.fxml"));
         primaryStage.setTitle("Sistema de Votación");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

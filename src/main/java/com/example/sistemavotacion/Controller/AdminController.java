@@ -1,10 +1,10 @@
 package com.example.sistemavotacion.Controller;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-
-import javafx.fxml.FXML;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class AdminController {
     @FXML private TextField candidateNameField;
@@ -19,15 +19,20 @@ public class AdminController {
     @FXML private TableColumn<CandidateResult, String> candidateColumn;
     @FXML private TableColumn<CandidateResult, Integer> votesColumn;
 
+    private ObservableList<CandidateResult> candidateResults = FXCollections.observableArrayList();
+
     @FXML
     public void initialize() {
         // Inicializar las columnas de la tabla
         candidateColumn.setCellValueFactory(new PropertyValueFactory<>("candidateName"));
         votesColumn.setCellValueFactory(new PropertyValueFactory<>("votes"));
+
+        // Vincular la lista observable a la tabla
+        resultsTable.setItems(candidateResults);
     }
 
     @FXML
-    protected void handleAddCandidate() {
+    public void handleAddCandidate() {
         String name = candidateNameField.getText();
         String party = candidatePartyField.getText();
         if (name.isEmpty() || party.isEmpty()) {
@@ -41,7 +46,7 @@ public class AdminController {
     }
 
     @FXML
-    protected void handleAddVoter() {
+    public void handleAddVoter() {
         String name = voterNameField.getText();
         String id = voterIdField.getText();
         if (name.isEmpty() || id.isEmpty()) {
@@ -55,11 +60,11 @@ public class AdminController {
     }
 
     @FXML
-    protected void handleUpdateResults() {
+    public void handleUpdateResults() {
         // Aquí iría la lógica para obtener los resultados actualizados de la base de datos
         // Por ahora, solo agregaremos algunos datos de ejemplo
-        resultsTable.getItems().clear();
-        resultsTable.getItems().addAll(
+        candidateResults.clear();
+        candidateResults.addAll(
                 new CandidateResult("Candidato 1", 100),
                 new CandidateResult("Candidato 2", 85),
                 new CandidateResult("Candidato 3", 120)

@@ -26,26 +26,32 @@ public class LoginController {
         String password = passwordField.getText();
 
         if ("votantes".equals(username) && "votantes".equals(password)) {
-            try {
-                URL resourceUrl = getClass().getResource("/com/example/sistemavotacion/view/hello-view.fxml");
-                System.out.println("Resource URL: " + resourceUrl);
-                if (resourceUrl == null) {
-                    throw new IOException("No se pudo encontrar el archivo FXML");
-                }
-
-                FXMLLoader loader = new FXMLLoader(resourceUrl);
-                Parent root = loader.load();
-
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) usernameField.getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-                messageLabel.setText("Error al cargar la nueva ventana: " + e.getMessage());
-            }
+            loadView("/com/example/sistemavotacion/view/hello-view.fxml");
+        } else if ("admin".equals(username) && "admin".equals(password)) {
+            loadView("/com/example/sistemavotacion/view/admin-view.fxml");
         } else {
             messageLabel.setText("Usuario o contraseña incorrectos");
+        }
+    }
+
+    private void loadView(String fxmlPath) {
+        try {
+            URL resourceUrl = getClass().getResource(fxmlPath);
+            System.out.println("Resource URL: " + resourceUrl);
+            if (resourceUrl == null) {
+                throw new IOException("No se pudo encontrar el archivo FXML");
+            }
+
+            FXMLLoader loader = new FXMLLoader(resourceUrl);
+            Parent root = loader.load();
+
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            messageLabel.setText("Error al cargar la nueva ventana: " + e.getMessage());
         }
     }
 }
