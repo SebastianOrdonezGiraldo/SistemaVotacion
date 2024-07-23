@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.sistemavotacion.Controller.MainController"
+            prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f0f0f0;">
+    <children>
+        <VBox spacing="20" alignment="CENTER" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+            <Label text="Sistema de Votación" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <TabPane tabClosingPolicy="UNAVAILABLE">
+                <Tab text="Agregar Candidato">
+                    <VBox spacing="10" alignment="CENTER">
+                        <TextField fx:id="candidateNameField" promptText="Nombre del Candidato"/>
+                        <TextField fx:id="candidatePartyField" promptText="Partido Político"/>
+                        <Button text="Agregar Candidato" onAction="#handleAddCandidate"/>
+                        <Label fx:id="candidateMessage"/>
+                    </VBox>
+                </Tab>
+
+                <Tab text="Agregar Votante">
+                    <VBox spacing="10" alignment="CENTER">
+                        <TextField fx:id="voterNameField" promptText="Nombre del Votante"/>
+                        <TextField fx:id="voterIdField" promptText="Identificación del Votante"/>
+                        <Button text="Agregar Votante" onAction="#handleAddVoter"/>
+                        <Label fx:id="voterMessage"/>
+                    </VBox>
+                </Tab>
+
+                <Tab text="Resultados de Votos">
+                    <VBox spacing="10" alignment="CENTER">
+                        <Button text="Actualizar Resultados" onAction="#handleUpdateResults"/>
+                        <TableView fx:id="resultsTable">
+                            <columns>
+                                <TableColumn fx:id="candidateColumn" text="Candidato"/>
+                                <TableColumn fx:id="votesColumn" text="Votos"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </Tab>
+            </TabPane>
+        </VBox>
+    </children>
+</AnchorPane>
